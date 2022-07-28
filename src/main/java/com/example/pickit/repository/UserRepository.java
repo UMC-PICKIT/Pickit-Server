@@ -2,6 +2,7 @@ package com.example.pickit.repository;
 
 import com.example.pickit.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ public class UserRepository {
         em.persist(user);
     }
 
-    public User findOne(Long id) {
+    public User findUser(Long id) {
         return em.find(User.class, id);
     }
 
@@ -33,4 +34,11 @@ public class UserRepository {
                 .getResultList();
     }
 
+    @Modifying(clearAutomatically = true)
+    public void updateUserInfo(Long id, String updatedNickName) {
+        //영속성 문제 발생할 가능성 있음 -> clearAutomatically로 해결될 지 의문
+        em.createQuery("update User u set u.nickName = :nickName where u.id = :id")
+                .setParameter("nickName", updatedNickName)
+                .setParameter("id", id);
+    }
 }
