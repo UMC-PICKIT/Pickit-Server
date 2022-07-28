@@ -13,7 +13,8 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long id;
 
     private String email;
     private String phone;
@@ -31,5 +32,8 @@ public class User {
 
     private LocalDateTime updatedAt;
 
+    public User() {
+        this.status = "ACTIVE";
+    }
 }
 
