@@ -36,6 +36,6 @@ public class UserService {
     }
 
     public User findOne(Long id) {
-        return userRepository.findOne(id);
+        return userRepository.findUser(id);
     }
 }
