@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserRepository {
 
+    @PersistenceContext
     private final EntityManager em;
 
     public void saveUser(User user) {

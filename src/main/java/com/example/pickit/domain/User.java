@@ -23,17 +23,12 @@ public class User {
 
     @Embedded
     private Address address;
+    @Column(insertable = false, updatable = false)
+    private String user_status;
 
-    private String status;
-
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     public User() {
-        this.status = "ACTIVE";
+        this.user_status = "ACTIVE";
     }
 }
 
