@@ -1,5 +1,11 @@
 spring:
-
+  application:
+    name: "pickit"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://pickit-database.cbdhzgyxf31e.ap-northeast-2.rds.amazonaws.com/pickitDB?serverTimezone=UTC&characterEncoding=UTF-8
+    username: pickit
+    password: pickit!1234
 logging:
   level:
     org.hibernate.SQL: debug
