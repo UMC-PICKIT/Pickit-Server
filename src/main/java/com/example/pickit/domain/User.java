@@ -26,7 +26,7 @@ public class User {
     @Column(insertable = false, updatable = false)
     private String user_status;
 
-
+    //test
     public User() {
         this.user_status = "ACTIVE";
     }
