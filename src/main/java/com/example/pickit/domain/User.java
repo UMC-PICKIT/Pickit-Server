@@ -1,14 +1,17 @@
 package com.example.pickit.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -16,19 +19,21 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    private String email;
-    private String phone;
     private String nickName;
     private String userName;
+    private String email;
+    private String phone;
 
-    @Embedded
-    private Address address;
-    @Column(insertable = false, updatable = false)
-    private String user_status;
+    @OneToMany(mappedBy = "user")
+    private List<Address> addressList = new ArrayList<>();
 
-    //test
-    public User() {
-        this.user_status = "ACTIVE";
-    }
+    @OneToMany(mappedBy = "client")
+    private List<Order> orderList = new ArrayList<>();
+
+    private String userStatus;
+
+    @Column(updatable = false)
+    private LocalDateTime userCreatedAt;
+
 }
 

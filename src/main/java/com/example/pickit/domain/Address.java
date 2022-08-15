@@ -1,23 +1,51 @@
 package com.example.pickit.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 
-@Embeddable
-@Getter
+@Entity
+@Getter @Setter
 public class Address {
+    @Id
+    @GeneratedValue
+    @Column(name = "address_id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String city;
     private String street;
     private String zipcode;
 
-    private String status;
+    private int mainAddress=0;
 
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private String addressStatus = "ACTIVE";
 
-    private LocalDateTime updatedAt;
+    public void setUser(User user) {
+        this.user = user;
+        user.getAddressList().add(this);
+    }
+
+    public static Address createAddress(User user, String city, String street, String zipcode) {
+        Address newAddress = new Address();
+        newAddress.setUser(user);
+        newAddress.setCity(city);
+        newAddress.setStreet(street);
+        newAddress.setZipcode(zipcode);
+
+        return newAddress;
+    }
+
+    protected Address() {
+    }
+
+    public Address(String city, String street, String zipcode) {
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 }

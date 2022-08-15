@@ -1,5 +1,6 @@
 package com.example.pickit.domain;
 
+import com.example.pickit.exception.NotEnoughStockException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,4 +39,17 @@ public class Menu extends BaseEntity{
 
     private String status;
 
+    private int stockQuantity;
+
+    public void addStock(int quantity){
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }

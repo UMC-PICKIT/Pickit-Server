@@ -38,8 +38,24 @@ public class UserRepository {
     @Modifying(clearAutomatically = true)
     public void updateUserInfo(Long id, String updatedNickName) {
         //영속성 문제 발생할 가능성 있음 -> clearAutomatically로 해결될 지 의문
-        em.createQuery("update User u set u.nickName = :nickName where u.id = :id")
-                .setParameter("nickName", updatedNickName)
-                .setParameter("id", id);
+        User findUser = em.find(User.class, id);
+        findUser.setNickName(updatedNickName);
+        em.persist(findUser);
+//        em.createQuery("update User u set u.nickName = :nickName where u.id = :id")
+//                .setParameter("nickName", updatedNickName)
+//                .setParameter("id", id);
+    }
+
+    @Modifying(clearAutomatically = true)
+    public void updateUserStatus(Long id) {
+        User findUser = em.find(User.class, id);
+        if (findUser.getUserStatus().equals("INACTIVE")) {
+            throw new IllegalStateException("이미 삭제된 유저입니다");
+        } else {
+            findUser.setUserStatus("INACTIVE");
+            em.persist(findUser);
+//            em.createQuery("update User u set u.user_status = :status where u.id = :id")
+//                    .setParameter("status", "INACTIVE");
+        }
     }
 }
