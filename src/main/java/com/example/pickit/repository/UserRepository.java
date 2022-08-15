@@ -49,10 +49,10 @@ public class UserRepository {
     @Modifying(clearAutomatically = true)
     public void updateUserStatus(Long id) {
         User findUser = em.find(User.class, id);
-        if (findUser.getUserStatus().equals("INACTIVE")) {
+        if (findUser.getStatus().equals("INACTIVE")) {
             throw new IllegalStateException("이미 삭제된 유저입니다");
         } else {
-            findUser.setUserStatus("INACTIVE");
+            findUser.setStatus("INACTIVE");
             em.persist(findUser);
 //            em.createQuery("update User u set u.user_status = :status where u.id = :id")
 //                    .setParameter("status", "INACTIVE");
