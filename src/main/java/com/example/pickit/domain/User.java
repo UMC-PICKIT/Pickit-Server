@@ -30,10 +30,10 @@ public class User {
     @OneToMany(mappedBy = "client")
     private List<Order> orderList = new ArrayList<>();
 
-    private String userStatus;
+    private String status;
 
     @Column(updatable = false)
-    private LocalDateTime userCreatedAt;
+    private LocalDateTime createdAt;
 
 }
 
