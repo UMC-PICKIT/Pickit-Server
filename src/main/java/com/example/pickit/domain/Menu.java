@@ -1,6 +1,5 @@
 package com.example.pickit.domain;
 
-import com.example.pickit.exception.NotEnoughStockException;
 import lombok.*;
 
 import javax.persistence.*;
