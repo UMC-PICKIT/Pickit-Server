@@ -7,8 +7,11 @@ import com.example.pickit.domain.StoreImage;
 import com.example.pickit.dto.StoreInfoDto;
 import com.example.pickit.repository.StoreImageRepository;
 import com.example.pickit.repository.StoreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import static com.example.pickit.config.BaseResponseStatus.*;
 
@@ -16,14 +19,25 @@ import static com.example.pickit.config.BaseResponseStatus.*;
 @Service
 public class StoreService {
 
+    @Autowired
     private StoreRepository storeRepository;
+    @Autowired
     private StoreImageRepository storeImageRepository;
 
-//    public StoreInfoDto getStoreInfo(long storeId) throws BaseException {
-//        Optional<Store> store = storeRepository.findByStoreId(storeId);
-//        if (!store.isPresent()) {
-//            throw new BaseException(NO_SHOP_INFO);
-//        }
-//        List<StoreImage> storeImageList =
-//    }
+    public StoreInfoDto getStoreInfo(Long storeId) throws BaseException {
+        Optional<Store> store = storeRepository.findByStoreId(storeId);
+        System.out.println(store.get());
+        if (store.isEmpty()) {
+            throw new BaseException(NO_SHOP_INFO);
+        }
+        Store storeData = store.get();
+        System.out.println(storeData.toString());
+        List<StoreImage> storeImage = storeImageRepository.findByStore(store.get());
+        List<String> storeImgUrlList = new ArrayList();
+        for(StoreImage img : storeImage) {
+            storeImgUrlList.add(img.getImageUrl());
+        }
+        StoreInfoDto storeInfoDto = new StoreInfoDto(storeData.getStoreName(), storeData.getStoreCallNum(), storeData.getStoreInfo(), storeData.getDeliveryTip(), storeData.getStoreAddress(), storeData.getStoreDescription(), storeImgUrlList);
+        return storeInfoDto;
+    }
 }
