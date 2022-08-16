@@ -28,6 +28,12 @@ public class OrderRepository {
         return em.find(Order.class, orderId);
     }
 
+    public List<Order> findAllOrdersByUserId(Long userId) {
+        return em.createQuery("select o from Order o where o.client.id= :userId")
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Order> cq = cb.createQuery(Order.class);

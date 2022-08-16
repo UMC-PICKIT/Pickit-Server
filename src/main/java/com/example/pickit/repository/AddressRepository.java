@@ -32,6 +32,12 @@ public class AddressRepository{
         return em.find(Address.class, id);
     }
 
+    public List<Address> findAllAddressByUserId(Long userId) {
+        return em.createQuery("select a from Address a where a.user.id= : userId")
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
     @Modifying(clearAutomatically = true)
     public void updateAddressStatus(Long id) {
         Address foundAddress = findAddress(id);
