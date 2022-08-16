@@ -11,6 +11,9 @@ public enum BaseResponseStatus {
      * 1000 : 요청 성공
      */
     SUCCESS(true, 1000, "요청에 성공하였습니다."),
+    USER_SAVE_SUCCESS(true, 1001, "회원 정보 저장에 성공하였습니다."),
+    USER_DELETE_SUCCESS(true, 1002, "회원 정보 삭제에 성공하였습니다."),
+    USER_UPDATE_SUCCESS(true, 1003, "회원 정보 수정에 성공하였습니다."),
 
 
     /**
