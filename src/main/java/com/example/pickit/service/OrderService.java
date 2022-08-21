@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,14 +23,18 @@ public class OrderService {
 
     @Transactional
     public Long order(Long userId, Long menuId, int count) {
-        User foundUser = userRepository.findUser(userId);
+        Optional<User> foundUser = userRepository.findUserById(userId);
 
-        Delivery delivery = new Delivery();
-        delivery.setAddress(addressRepository.getMainAddress(foundUser.getId()));
-        delivery.setStatus(DeliveryStatus.READY);
+        if (foundUser.isPresent()) {
+            Delivery delivery = new Delivery();
 
-        //menuRepository 완료되어야 진행 가능.
+            Optional<Address> foundMainAddress = addressRepository.findByMainAddressIs(1);
+            if (foundMainAddress.isPresent()) {
+                delivery.setAddress(foundMainAddress.get());
+                delivery.setStatus(DeliveryStatus.READY);
+            }
 
+        }
         return 1L;
     }
 
