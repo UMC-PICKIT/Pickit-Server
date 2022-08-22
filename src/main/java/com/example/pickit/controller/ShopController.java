@@ -41,13 +41,13 @@ public class ShopController {
         }
     }
 
-//    @GetMapping("/shop/{shopId}/detail")
-//    public BaseResponse<StoreSimpleDto> storeDetail(@PathVariable("shopId") Long shopId) {
-//        try {
-//            StoreSimpleDto storeSimpleDto = storeService.getStoreSimpleInfo(shopId);
-//            return new BaseResponse<>(storeSimpleDto);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>(exception.getStatus());
-//        }
-//    }
+    @GetMapping("/shop/{shopId}/detail")
+    public BaseResponse<StoreSimpleDto> storeDetail(@PathVariable("shopId") Long shopId) {
+        try {
+            StoreSimpleDto storeSimpleDto = storeService.getStoreSimpleInfo(shopId);
+            return new BaseResponse<>(storeSimpleDto);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 }
