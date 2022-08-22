@@ -1,12 +1,8 @@
 package com.example.pickit.service;
 
 import com.example.pickit.config.BaseException;
-import com.example.pickit.config.BaseResponseStatus;
-import com.example.pickit.domain.Menu;
 import com.example.pickit.domain.Store;
 import com.example.pickit.domain.StoreImage;
-import com.example.pickit.dto.MenuDetailDto;
-import com.example.pickit.dto.StoreInfoDto;
 import com.example.pickit.dto.StoreSimpleDto;
 import com.example.pickit.repository.StoreImageRepository;
 import com.example.pickit.repository.StoreRepository;
@@ -15,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import static com.example.pickit.config.BaseResponseStatus.*;
 
 
