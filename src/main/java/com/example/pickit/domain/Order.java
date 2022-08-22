@@ -20,7 +20,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User client;
+    private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderTask> orderTaskList = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     public void setUser(User client) {
-        this.client = client;
+        this.user = client;
         client.getOrderList().add(this);
     }
 
