@@ -40,7 +40,17 @@ public class Menu extends BaseEntity{
 
     private String status;
 
+    private int orderCount = 0;
+
     private int stockQuantity;
+
+    public void addOrderCount(int orderCount) {
+        this.orderCount += orderCount;
+    }
+
+    public void removeOrderCount(int orderCount) {
+        this.orderCount -= orderCount;
+    }
 
     public void addStock(int quantity){
         this.stockQuantity += quantity;
