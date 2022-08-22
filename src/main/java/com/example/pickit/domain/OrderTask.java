@@ -39,6 +39,7 @@ public class OrderTask {
 
     public void cancel() {
         getMenu().addStock(count);
+        getMenu().removeOrderCount(count);
     }
 
     public int getTotalPrice() {
