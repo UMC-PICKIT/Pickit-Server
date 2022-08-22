@@ -25,19 +25,24 @@ public class StoreService {
     private StoreImageRepository storeImageRepository;
 
     public StoreInfoDto getStoreInfo(Long storeId) throws BaseException {
-        Optional<Store> store = storeRepository.findByStoreId(storeId);
-        System.out.println(store.get());
-        if (store.isEmpty()) {
-            throw new BaseException(NO_SHOP_INFO);
-        }
-        Store storeData = store.get();
-        System.out.println(storeData.toString());
-        List<StoreImage> storeImage = storeImageRepository.findByStore(store.get());
-        List<String> storeImgUrlList = new ArrayList();
-        for(StoreImage img : storeImage) {
-            storeImgUrlList.add(img.getImageUrl());
-        }
-        StoreInfoDto storeInfoDto = new StoreInfoDto(storeData.getStoreName(), storeData.getStoreCallNum(), storeData.getStoreInfo(), storeData.getDeliveryTip(), storeData.getStoreAddress(), storeData.getStoreDescription(), storeImgUrlList);
-        return storeInfoDto;
+//        Optional<Store> store = storeRepository.findByStoreId(storeId);
+//
+//        if (store.isEmpty()) {
+//            throw new BaseException(NO_SHOP_INFO);
+//        }
+//
+//        Store storeData = store.get();
+//
+//        List<StoreImage> storeImage = storeImageRepository.findByStore(store.get());
+//        List<String> storeImgUrlList = new ArrayList();
+//        for(StoreImage img : storeImage) {
+//            storeImgUrlList.add(img.getImageUrl());
+//        }
+//
+//
+//
+//        StoreInfoDto storeInfoDto = new StoreInfoDto(storeData.getStoreName(), storeData.getStoreCallNum(), storeData.getStoreInfo(), storeData.getDeliveryTip(), storeData.getStoreAddress(), storeData.getStoreDescription(), storeImgUrlList);
+//        return storeInfoDto;
+        return null;
     }
 }

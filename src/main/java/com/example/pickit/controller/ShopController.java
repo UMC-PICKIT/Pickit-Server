@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class StoreController {
+public class ShopController {
     @Autowired
     private StoreService storeService;
-    @GetMapping("/store/info/{storeId}")
+    @GetMapping("/shop/{shopId}")
     public BaseResponse<StoreInfoDto> storeInfo(@PathVariable("storeId") Long storeId) {
         try{
             StoreInfoDto storeInfoDto = storeService.getStoreInfo(storeId);
