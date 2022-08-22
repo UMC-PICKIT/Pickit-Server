@@ -25,6 +25,7 @@ public class AddressService {
         Optional<User> foundUser = userRepository.findUserById(userId);
         if (foundUser.isPresent()) {
             Address newAddress = Address.createAddress(foundUser.get(), city, street, zipcode);
+            newAddress.setUser(foundUser.get());
             addressRepository.save(newAddress);
         } else {
             throw new IllegalStateException("유저를 찾을 수 없습니다");
