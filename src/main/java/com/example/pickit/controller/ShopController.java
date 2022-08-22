@@ -21,15 +21,15 @@ public class ShopController {
     @Autowired
     private MenuService menuService;
 
-//    @GetMapping("/shop/{shopId}")
-//    public BaseResponse<StoreInfoDto> storeInfo(@PathVariable("storeId") Long storeId) {
-//        try{
-//            StoreInfoDto storeInfoDto = storeService.getStoreInfo(storeId);
-//            return new BaseResponse<>(storeInfoDto);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>(exception.getStatus());
-//        }
-//    }
+    @GetMapping("/shop/{shopId}")
+    public BaseResponse<StoreInfoDto> storeInfo(@PathVariable("storeId") Long storeId) {
+        try{
+            StoreInfoDto storeInfoDto = storeService.getStoreInfo(storeId);
+            return new BaseResponse<>(storeInfoDto);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
     @GetMapping("/shop/{shopId}/menu")
     public BaseResponse<ArrayList<MenuDetailDto>> storeMenuList(@PathVariable("shopId") Long shopId) {
