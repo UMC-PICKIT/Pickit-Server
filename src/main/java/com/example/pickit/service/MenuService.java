@@ -24,7 +24,6 @@ public class MenuService {
     public MenuDetailDto getMenuDetail(long menuId) throws BaseException {
         Menu testMenu = new Menu();
         Optional<Store> byStoreId = storeRepository.findByStoreId(1l);
-        System.out.println(byStoreId.get().toString());
         testMenu.setMenuName("123");
         testMenu.setMenuPrice(10000);
         testMenu.setMenuInfo("12345");
@@ -34,8 +33,6 @@ public class MenuService {
         try{
             Optional<Menu> menuInfo = menuRepository.findByMenuId(menuId);
             Menu menu = menuInfo.get();
-            System.out.println("============");
-            System.out.println(menu.toString());
             MenuDetailDto menuDetailDto = new MenuDetailDto(menuId,menu.getMenuName(), menu.getMenuImageUrl(), menu.getBestMenu(), menu.getSoldOut(), menu.getMenuPrice(), menu.getMenuInfo(), menu.getCookingTime(), menu.getPerson_amount(), menu.getStockQuantity(), menu.getStore().getDeliveryTip(), menu.getStore().getStoreName());
             return menuDetailDto;
         }  catch (Exception e) {
