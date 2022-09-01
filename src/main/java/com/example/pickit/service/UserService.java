@@ -5,6 +5,9 @@ import com.example.pickit.domain.User;
 import com.example.pickit.dto.UserInfoDto;
 import com.example.pickit.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
@@ -16,7 +19,7 @@ import static com.example.pickit.config.BaseResponseStatus.DATABASE_ERROR;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserService{
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     @Transactional
     public Long join(User user) throws BaseException{
@@ -83,7 +86,7 @@ public class UserService{
         try {
             Optional<User> foundUser = userRepository.findUserById(userId);
             if (foundUser.isPresent()) {
-                UserInfoDto returnDto = new UserInfoDto(foundUser.get().getUserName(), foundUser.get().getNickName(), foundUser.get().getEmail(), foundUser.get().getPhone(), foundUser.get().getStatus());
+                UserInfoDto returnDto = new UserInfoDto(foundUser.get().getUsername(), foundUser.get().getNickName(), foundUser.get().getEmail(), foundUser.get().getPhone(), foundUser.get().getStatus());
                 return returnDto;
             } else {
                 throw new IllegalStateException("유저를 찾을 수 없습니다");
@@ -92,5 +95,11 @@ public class UserService{
             e.printStackTrace();
             throw new BaseException(DATABASE_ERROR);
         }
+    }
+
+    @Override
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException((email)));
     }
 }
